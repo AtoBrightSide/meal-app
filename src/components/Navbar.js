@@ -2,8 +2,47 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from './Button';
 import './Navbar.css'
+import styled from 'styled-components';
+import { CgSun } from "react-icons/cg";
+import { HiMoon } from "react-icons/hi";
 
-function Navbar() {
+const Nav = styled.nav`
+    background: ${props => props.theme.navbarColor};
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+`;
+
+const Toggle = styled.button`
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%50%;
+  border: none;
+  background-color: ${props => props.theme.titleColor};
+  color: ${props => props.theme.navbarColor};
+  &::focus {
+      outline: none;
+  }
+  transition: all .5s ease;  
+`;
+
+function Navbar(props) {
+
+    function changeTheme() {
+        if (props.theme === "light")
+            props.setTheme("dark");
+        else
+            props.setTheme("light");
+    }
+
+    const icon = props.theme === "light" ? <HiMoon size={40} /> : <CgSun size={40} />
+
     const [click, setClick] = useState(false);
 
     const [button, setButton] = useState(true);
@@ -19,48 +58,46 @@ function Navbar() {
         }
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         showButton();
     }, []);
 
     window.addEventListener('resize', showButton);
 
     return (
-        <nav className="navbar">
-            <div className="navbar-container">
-                <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
-                    Meal-App <i class="fas fa-hamburger"></i>
-                </Link>
-                <div className="menu-icon" onClick={handleClick}>
-                    <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+        <>
+            <Nav>
+                <div className="navbar-container">
+                    <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
+                        Meal-App <i class="fas fa-hamburger"></i>
+                    </Link>
+                    <div className="menu-icon" onClick={handleClick}>
+                        <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+                    </div>
+                    <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+                        <li className="nav-item">
+                            <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+                                All Meals
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to='/categories' className='nav-links' onClick={closeMobileMenu}>
+                                Categories
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to='/countries' className='nav-links' onClick={closeMobileMenu}>
+                                Countries
+                            </Link>
+                        </li>
+                        
+                    </ul>
+                    {button && <Toggle onClick={changeTheme}>
+                        {icon}
+                    </Toggle>}
                 </div>
-                <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-                    <li className="nav-item">
-                        <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-                            All Meals
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to='/categories' className='nav-links' onClick={closeMobileMenu}>
-                            Categories
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to='/countries' className='nav-links' onClick={closeMobileMenu}>
-                            Countries
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>
-                            Sign-Up
-                        </Link>
-                    </li>
-                </ul>
-                {button && <Button buttonStyle='btn--outline'>
-                    SIGN-UP
-                </Button>}
-            </div>
-        </nav>
+            </Nav>
+        </>
     )
 }
 

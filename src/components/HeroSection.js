@@ -60,7 +60,7 @@ function HeroSection() {
 
                 <Container>
                     <h1>{data.meals[0].strMeal[0]}</h1>
-                    <Row md={4}>
+                    <Row md={3} sm={1}>
                         {data.meals.map(meal => {
                             return (
                                 <>
