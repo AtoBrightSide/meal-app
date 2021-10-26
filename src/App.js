@@ -7,16 +7,17 @@ import Categories from './components/pages/Categories';
 import Countries from './components/pages/Countries';
 import { ThemeProvider } from 'styled-components';
 import { useState } from 'react';
+import Meal from './components/pages/Meal';
 
 const LightTheme = {
-  navbarColor: "grey",
-  titleColor: "#dc658b",
+  backgroundColor: "grey",
+  titleColor: "rgb(28, 27, 27)",
   tagLineColor: "black"
 };
 
 const DarkTheme = {
-  navbarColor: "linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%)",
-  titleColor: "#lightpink",
+  backgroundColor: "linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%)",
+  titleColor: "white",
   tagLineColor: "lavender"
 };
 
@@ -33,9 +34,10 @@ function App() {
         <Router>
           <Navbar theme={theme} setTheme={setTheme} />
           <Switch>
-            <Route path='/' exact component={Home} />
-            <Route path='/categories' exact component={Categories} />
-            <Route path='/countries' exact component={Countries} />
+            <Route theme={theme} setTheme={setTheme} path='/' exact component={Home} />
+            <Route theme={theme} setTheme={setTheme} path='/categories' exact component={Categories} />
+            <Route theme={theme} setTheme={setTheme} path='/countries' exact component={Countries} />
+            <Route theme={theme} setTheme={setTheme} path='/meal/:id' exact component={Meal} />
           </Switch>
         </Router>
       </ThemeProvider>

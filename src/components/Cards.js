@@ -22,7 +22,7 @@ function Cards(props) {
                 {data.meals.map(cat => {
                     return (
                         <div>
-                            <Card style={{ width: '18rem' }}>
+                            <Card style={{ width: '18rem', height: '30rem', margin: '15px' }}>
                                 <Card.Img variant="top" src="https://picsum.photos/200/300" />
                                 <Card.Body>
                                     <Card.Title>{props.letter === 'c' ? cat.strCategory : cat.strArea}</Card.Title>

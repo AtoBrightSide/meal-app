@@ -4,7 +4,22 @@ import '../App.css';
 import './Herosection.css';
 import axios from 'axios';
 
-import { Col, Row, Container, Card } from 'react-bootstrap';
+import { Col, Row, Card } from 'react-bootstrap';
+import styled from 'styled-components';
+
+const Container = styled.div`
+    background: ${props => props.theme.backgroundColor};
+    align-items: center;
+    justify-content: center;
+    transition: all .6s ease;
+    height: fit-content;
+`;
+
+const MyHeader = styled.h1`
+    color: ${props => props.theme.titleColor};
+    transition: all .6s ease;
+`;
+
 
 function HeroSection() {
     const baseURL = 'https://www.themealdb.com/api/json/v1/1/random.php';
@@ -26,7 +41,6 @@ function HeroSection() {
     useEffect(() => {
         axios.get(baseURL_2).then((response) => {
             setdata(response.data);
-            // console.log(response.data);
         })
     }, []);
 
@@ -34,7 +48,6 @@ function HeroSection() {
         const myStyle = {
             background: `url(${randomData.meals[0].strMealThumb}) center center/cover no-repeat`,
         };
-        // console.log(`the random data ${data}`);
         return (
             <>
                 <div className='hero-container' style={myStyle}>
@@ -59,20 +72,20 @@ function HeroSection() {
                 </div>
 
                 <Container>
-                    <h1>{data.meals[0].strMeal[0]}</h1>
+                    <MyHeader>{data.meals[0].strMeal[0]}</MyHeader>
                     <Row md={3} sm={1}>
                         {data.meals.map(meal => {
                             return (
                                 <>
                                     <Col>
-                                        <Card style={{ width: '18rem' }}>
+                                        <Card style={{ width: '25rem', height: '30rem', margin: '10px', backgroundColor: 'inherit' }}>
                                             <Card.Img variant="top" src={meal.strMealThumb} />
                                             <Card.Body>
                                                 <Card.Title>{meal.strMeal}</Card.Title>
                                                 <Card.Text>
                                                     {meal.strInstructions}
                                                 </Card.Text>
-                                                <Button variant="primary">Go somewhere</Button>
+                                                <Button path={'/meal/' + meal.idMeal}>Check out this meal</Button>
                                             </Card.Body>
                                         </Card>
                                     </Col>

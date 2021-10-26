@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Button } from './Button';
 import './Navbar.css'
 import styled from 'styled-components';
-import { CgSun } from "react-icons/cg";
-import { HiMoon } from "react-icons/hi";
 
 const Nav = styled.nav`
-    background: ${props => props.theme.navbarColor};
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    position: sticky;
-    top: 0;
-    z-index: 999;
+  background: ${props => props.theme.backgroundColor};
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 `;
 
 const Toggle = styled.button`
@@ -25,7 +22,7 @@ const Toggle = styled.button`
   border-radius: 50%50%;
   border: none;
   background-color: ${props => props.theme.titleColor};
-  color: ${props => props.theme.navbarColor};
+  color: ${props => props.theme.backgroundColor};
   &::focus {
       outline: none;
   }
@@ -41,7 +38,7 @@ function Navbar(props) {
             props.setTheme("light");
     }
 
-    const icon = props.theme === "light" ? <HiMoon size={40} /> : <CgSun size={40} />
+    const icon = props.theme === "dark" ? <span class="material-icons">wb_sunny </span> : <span class="material-icons">nightlight</span>
 
     const [click, setClick] = useState(false);
 
@@ -90,7 +87,7 @@ function Navbar(props) {
                                 Countries
                             </Link>
                         </li>
-                        
+
                     </ul>
                     {button && <Toggle onClick={changeTheme}>
                         {icon}
