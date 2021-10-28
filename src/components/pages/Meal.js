@@ -24,13 +24,18 @@ function Meal() {
                 <Container>
                     <Row>
                         <Col xs={12} md={6} >
-                            <Image src={meal.meals[0].strMealThumb} rounded />
+                            <Image src={meal.meals[0].strMealThumb} rounded fluid />
                         </Col>
                         <Col xs={12} md={6}>
                             <Row>
-                                <Col>Ingredients</Col>
-                                <Col>Minutes</Col>
-                                <Col>Calories</Col>
+                                <Col>Category</Col>
+                                <Col>Area</Col>
+                                <Col>Recommended to drink</Col>
+                            </Row>
+                            <Row>
+                                <Col>{meal.meals[0].strCategory}</Col>
+                                <Col>{meal.meals[0].strArea}</Col>
+                                <Col>{(meal.meals[0].strDrinkAlternate) ? meal.meals[0].strDrinkAlternate : "Just Get Drunk"}</Col>
                             </Row>
                         </Col>
                     </Row>

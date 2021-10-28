@@ -82,9 +82,6 @@ function HeroSection() {
                                             <Card.Img variant="top" src={meal.strMealThumb} />
                                             <Card.Body>
                                                 <Card.Title>{meal.strMeal}</Card.Title>
-                                                <Card.Text>
-                                                    {meal.strInstructions}
-                                                </Card.Text>
                                                 <Button path={'/meal/' + meal.idMeal}>Check out this meal</Button>
                                             </Card.Body>
                                         </Card>
