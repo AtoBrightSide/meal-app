@@ -15,7 +15,13 @@ const Container = styled.div`
     height: fit-content;
 `;
 
-const MyHeader = styled.h1`
+const MyHeader = styled.div`
+    color: ${props => props.theme.titleColor};
+    align-items: center;
+    transition: all .6s ease;
+`;
+
+const TheHeader = styled.h4`
     color: ${props => props.theme.titleColor};
     transition: all .6s ease;
 `;
@@ -56,23 +62,17 @@ function HeroSection() {
                     <div className="hero-btns">
                         <Button
                             className='btns'
-                            buttonStyle='btn--outline'
-                            buttonSize='btn--large'
-                        >
-                            GET STARTED
-                        </Button>
-                        <Button
-                            className='btns'
                             buttonStyle='btn--primary'
                             buttonSize='btn--large'
+                            path={'/meal/' + randomData.meals[0].idMeal}
                         >
-                            WATCH TRAILER <i className="far fa-play-circle"></i>
+                            GET STARTED
                         </Button>
                     </div>
                 </div>
 
                 <Container>
-                    <MyHeader>{data.meals[0].strMeal[0]}</MyHeader>
+                    <TheHeader>{data.meals[0].strMeal[0]}</TheHeader>
                     <Row md={3} sm={1}>
                         {data.meals.map(meal => {
                             return (
@@ -81,7 +81,7 @@ function HeroSection() {
                                         <Card style={{ width: '25rem', height: '30rem', margin: '10px', backgroundColor: 'inherit' }}>
                                             <Card.Img variant="top" src={meal.strMealThumb} />
                                             <Card.Body>
-                                                <Card.Title>{meal.strMeal}</Card.Title>
+                                                <Card.Title><MyHeader>{meal.strMeal}</MyHeader></Card.Title>
                                                 <Button path={'/meal/' + meal.idMeal}>Check out this meal</Button>
                                             </Card.Body>
                                         </Card>
